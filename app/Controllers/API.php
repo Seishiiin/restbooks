@@ -497,8 +497,16 @@
 
         /* ---------- AVIS ---------- */
 
-        public function getAvisByLivre() {
+        public function getAvisByLivre() { // Retourne un tableau d’objets JSON comportant les avis et notes sur le livre dont l’id est donné en paramètre
+            $id = $this -> request -> getGet('id');
+            $livre = Livre::find($id);
 
+            if($livre) {
+                $livre -> clients;
+                return $this -> respond($livre -> clients);
+            } else {
+                return $this -> failNotFound("Livre inconnu");
+            }
         }
 
         public function postAvis() {
